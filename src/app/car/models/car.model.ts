@@ -1,7 +1,7 @@
 export interface Car {
-    Id: number;
-    Make: string;
-    Model: string;
-    Year: number;
+    id: number;
+    make: string;
+    model: string;
+    year: number;
 }
   

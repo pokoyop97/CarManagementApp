@@ -7,7 +7,7 @@ import { Car } from '../models/car.model';
   providedIn: 'root'
 })
 export class CarService {
-  private apiUrl = 'http://localhost:5206/api/cars';
+  private apiUrl = 'http://localhost:5289/api/cars';
 
   constructor(private http: HttpClient) {}
 
@@ -20,7 +20,7 @@ export class CarService {
   }
 
   editCar(car: Car):Observable<Car[]>{
-    return this.http.put<Car[]>(`${this.apiUrl}/${car.Id}`, car);
+    return this.http.put<Car[]>(`${this.apiUrl}/${car.id}`, car);
   }
 
   createCar(car: Car): Observable<Car> {

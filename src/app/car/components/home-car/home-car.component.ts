@@ -21,23 +21,22 @@ export class HomeCarComponent {
   }
   addCar():void{
     const dialog = this.modalService.open(NewCarComponent)
-    dialog.afterClosed().subscribe(result=>{
-      this.cars.push(result)
+    dialog.afterClosed().subscribe(()=>{
+      this.loadCars();
     })
   }
   editCar(car:Car):void{
     const dialog = this.modalService.open(NewCarComponent,{
       data:car
     })
-    dialog.afterClosed().subscribe((result:Car)=>{
-      if(result){
-        const index = this.cars.findIndex(index=>{index.Id === result.Id});
-        this.cars[index] = result;
-      }
+    dialog.afterClosed().subscribe(()=>{
+      this.loadCars();
     })
   }
   loadCars(): void {
-    this.carService.getCars().subscribe(cars => (this.cars = cars));
+    this.carService.getCars().subscribe(cars => {
+      this.cars = cars
+    });
   }
 
   deleteCar(id: number): void {

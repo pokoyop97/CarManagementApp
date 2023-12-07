@@ -20,10 +20,10 @@ export class NewCarComponent {
   ) {
     if(data?.id) this.isEdit= true;
     this.carForm = this.fb.group({
-      Id:[data?.id || 0],
-      Make: [data?.make || '', Validators.required],
-      Model: [data?.model || '', Validators.required],
-      Year: [data?.year || '', [Validators.required, Validators.pattern(/^[0-9]{4}$/)]],
+      id:[data?.id || 0],
+      make: [data?.make || '', Validators.required],
+      model: [data?.model || '', Validators.required],
+      year: [data?.year || '', [Validators.required, Validators.pattern(/^[0-9]{4}$/)]],
     });
   }
 

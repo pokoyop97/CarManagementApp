@@ -1,17 +1,17 @@
 <form [formGroup]="carForm" (ngSubmit)="submitForm()" class="mat-elevation-z8">
     <mat-form-field class="full-width">
       <mat-label>Make</mat-label>
-      <input matInput formControlName="Make" required>
+      <input matInput formControlName="make" required>
     </mat-form-field>
   
     <mat-form-field class="full-width">
       <mat-label>Model</mat-label>
-      <input matInput formControlName="Model" required>
+      <input matInput formControlName="model" required>
     </mat-form-field>
   
     <mat-form-field class="full-width">
       <mat-label>Year</mat-label>
-      <input matInput formControlName="Year" required pattern="^[0-9]{4}$">
+      <input matInput formControlName="year" required pattern="^[0-9]{4}$">
     </mat-form-field>
   
     <button mat-raised-button color="primary" type="submit">Submit</button>
