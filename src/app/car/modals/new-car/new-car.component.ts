@@ -11,18 +11,19 @@ import { Car } from '../../models/car.model';
 })
 export class NewCarComponent {
   carForm: FormGroup;
+  isEdit:boolean=false;
   constructor(
     private fb: FormBuilder, 
     private carService: CarService,
     public dialogRef: MatDialogRef<NewCarComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Car,
+    @Inject(MAT_DIALOG_DATA) public data:any,
   ) {
-    console.log(data);
+    if(data?.id) this.isEdit= true;
     this.carForm = this.fb.group({
-      Make: [data?.Make || '', Validators.required],
-      Model: [data?.Model || '', Validators.required],
-      Year: [data?.Year || '', [Validators.required, Validators.pattern(/^[0-9]{4}$/)]],
-      Id: [data?.Id]
+      Id:[data?.id || 0],
+      Make: [data?.make || '', Validators.required],
+      Model: [data?.model || '', Validators.required],
+      Year: [data?.year || '', [Validators.required, Validators.pattern(/^[0-9]{4}$/)]],
     });
   }
 
@@ -32,9 +33,15 @@ export class NewCarComponent {
   submitForm(): void {
     if (this.carForm.valid) {
       const car = this.carForm.value;
-      this.carService.createCar(car).subscribe((x) => {
-        this.dialogRef.close(x);
-      });
+      if(!this.isEdit){
+        this.carService.createCar(car).subscribe((x) => {
+          this.dialogRef.close(x);
+        });
+      }else{
+        this.carService.editCar(car).subscribe((x)=> {
+          this.dialogRef.close(x);
+        })
+      }
     }
   }
 }

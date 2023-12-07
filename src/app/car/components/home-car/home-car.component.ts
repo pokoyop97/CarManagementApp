@@ -20,22 +20,19 @@ export class HomeCarComponent {
     this.loadCars();
   }
   addCar():void{
-    const dialog = this.modalService.open(NewCarComponent,{
-      data:{Id:this.cars.length+1}
-    })
+    const dialog = this.modalService.open(NewCarComponent)
     dialog.afterClosed().subscribe(result=>{
       this.cars.push(result)
-      console.log(this.cars)
     })
   }
   editCar(car:Car):void{
     const dialog = this.modalService.open(NewCarComponent,{
       data:car
     })
-    dialog.afterClosed().subscribe(result=>{
+    dialog.afterClosed().subscribe((result:Car)=>{
       if(result){
-        this.cars.push(result)
-        console.log(this.cars)
+        const index = this.cars.findIndex(index=>{index.Id === result.Id});
+        this.cars[index] = result;
       }
     })
   }
